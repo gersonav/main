@@ -348,8 +348,9 @@ var Grid = (function() {
 			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 			this.$loading = $( '<div class="og-loading"></div>' );
 			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
+			this.$fullvideo = $( '<div class="og-fullvideo"><div class="iframe-container"></div></div>' ).append( this.$loading );
 			this.$closePreview = $( '<span class="og-close"></span>' );
-			this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$fullimage, this.$details );
+			this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$fullvideo, this.$fullimage, this.$details );
 			this.$previewEl = $( '<div class="og-expander"></div>' ).append( this.$previewInner );
 			// append preview element to the item
 			this.$item.append( this.getEl() );
@@ -382,7 +383,8 @@ var Grid = (function() {
 					href : $itemEl.attr( 'href' ),
 					largesrc : $itemEl.data( 'largesrc' ),
 					title : $itemEl.data( 'title' ),
-					description : $itemEl.data( 'description' )
+					description : $itemEl.data( 'description' ),
+					videosrc: $itemEl.data('videosrc')
 				};
 
 			this.$title.html( eldata.title );
@@ -398,7 +400,9 @@ var Grid = (function() {
 
 			// preload large image and add it to the preview
 			// for smaller screens we don´t display the large image (the media query will hide the fullimage wrapper)
-			if( self.$fullimage.is( ':visible' ) ) {
+			if( self.$fullimage.is( ':visible' ) && eldata.largesrc ) {
+				self.$fullimage.show();
+				self.$fullvideo.hide();
 				this.$loading.show();
 				$( '<img/>' ).load( function() {
 					var $img = $( this );
@@ -409,6 +413,21 @@ var Grid = (function() {
 						self.$fullimage.append( self.$largeImg );
 					}
 				} ).attr( 'src', eldata.largesrc );	
+			}
+
+			if ( self.$fullvideo.is( ':visible' ) && eldata.videosrc ) {
+				self.$fullvideo.show();
+				self.$fullimage.hide();
+				self.$loading.show();
+			
+				var $iframe = $( '<iframe style="display:none;" width="803" height="500" frameborder="0" allow="autoplay; encrypted-media"></iframe>' );
+				$iframe.attr('src', "https://www.youtube.com/embed/"+eldata.videosrc+"?rel=0&amp;controls=0&amp;showinfo=0")
+					.load(function() {
+						self.$loading.hide();
+						$iframe.fadeIn(350);
+					});
+				self.$fullvideo.find( 'iframe' ).remove();
+				self.$fullvideo.append($iframe)
 			}
 
 		},

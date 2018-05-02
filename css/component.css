@@ -87,6 +87,7 @@
 }
 
 .og-fullimg,
+.og-fullvideo,
 .og-details {
 	width: 50%;
 	float: left;
@@ -99,11 +100,11 @@
 	padding: 0 40px 0 20px;
 }
 
-.og-fullimg {
+.og-fullimg, .og-fullvideo {
 	text-align: center;
 }
 
-.og-fullimg img {
+.og-fullvideo iframe, .og-fullimg img {
 	display: inline-block;
 	max-height: 100%;
 	max-width: 100%;
@@ -194,7 +195,7 @@
 	and (min-device-width: 768px) 
 	and (max-width: 1024px) {
 
-	.og-fullimg { display: none; }
+	.og-fullimg, .og-fullvideo { display: none; }
 	.og-details { float: none; width: 100%; }
 	.og-grid li {
 	display: inline-block;
