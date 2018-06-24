@@ -12,7 +12,10 @@
 	margin: 16px 8px 0 8px;
 	vertical-align: top;
 	height: 360px;
+	
 }
+
+
 
 .og-grid li > a,
 .og-grid li > a img {
@@ -21,6 +24,35 @@
 	display: block;
 	position: relative;
 }
+
+.og-grid img {
+  opacity: 1;
+
+}
+
+.og-grid img:hover {
+  opacity: 1;
+
+}
+
+.og-grid a:hover .text {
+	opacity: 1;
+}
+
+.text {
+  font-family: 'Futura';
+  color: #FCC256;
+  font-size: 40px;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #333333;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+ }
 
 .og-grid li.og-expanded > a::after {
 	top: auto;
@@ -35,6 +67,21 @@
 	left: 50%;
 	margin: -20px 0 0 -15px;
 }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+
 
 .og-expander {
 	position: absolute;

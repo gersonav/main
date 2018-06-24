@@ -60,6 +60,15 @@ a {
 	position: relative;
 }
 
+.containover {
+  position: relative;
+  width: 100%;
+}
+
+
+
+
+}
 
 .main > p {
 	text-align: center;
